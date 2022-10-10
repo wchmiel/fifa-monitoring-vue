@@ -13,3 +13,7 @@ export interface UsersListMenuConfig {
   action: Function;
   disableProp?: string;
 }
+
+export enum USER_LOCAL_STORAGE {
+  ID_ITEM = "MHSID",
+}

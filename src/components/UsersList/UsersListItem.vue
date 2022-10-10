@@ -44,7 +44,7 @@ export default defineComponent({
           <h5>{{ props.user.company }}</h5>
         </v-col>
         <v-col
-          v-if="props.menuConfig"
+          v-if="props.menuConfig && props.menuConfig.length"
           cols="3"
           class="d-flex justify-center align-center pr-2"
         >

@@ -22,6 +22,7 @@ export default createStore<State>({
         type: SNACKBAR_TYPE.SUCCESS,
         text: "",
       },
+      userId: "",
     };
   },
   getters: {
@@ -36,6 +37,12 @@ export default createStore<State>({
     },
     getSnackbarConfig(state: State): Snackbar {
       return state.snackbar;
+    },
+    getUserId(state: State): string {
+      return state.userId;
+    },
+    isUserAuthenticated(state: State): boolean {
+      return !!state.userId;
     },
   },
   mutations: {
@@ -67,6 +74,9 @@ export default createStore<State>({
         type: SNACKBAR_TYPE.SUCCESS,
         ...payload,
       };
+    },
+    [MUTATIONS.SAVE_USER_ID](state: State, userId: string): void {
+      state.userId = userId;
     },
   },
   actions,

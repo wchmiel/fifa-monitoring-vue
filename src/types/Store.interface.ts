@@ -4,6 +4,7 @@ export interface State {
   users: Array<User>;
   isRoomAvailable: boolean;
   snackbar: Snackbar;
+  userId: string;
 }
 
 export interface Snackbar {
@@ -21,6 +22,8 @@ export enum ACTIONS {
   FETCH_USERS = "FETCH_USERS",
   UPDATE_USER_EAGER_TO_PLAY = "UPDATE_USER_EAGER_TO_PLAY",
   GET_ROOM_STATUS = "GET_ROOM_STATUS",
+  SAVE_USER_ID = "SAVE_USER_ID",
+  GET_USER_ID = "GET_USER_ID",
 }
 
 export enum MUTATIONS {
@@ -28,6 +31,7 @@ export enum MUTATIONS {
   UPDATE_USER_EAGER_TO_PLAY = "UPDATE_USER_EAGER_TO_PLAY",
   UPDATE_ROOM_STATUS = "UPDATE_ROOM_STATUS",
   SHOW_SNACKBAR = "SHOW_SNACKBAR",
+  SAVE_USER_ID = "SAVE_USER_ID",
 }
 
 export enum SNACKBAR_TYPE {

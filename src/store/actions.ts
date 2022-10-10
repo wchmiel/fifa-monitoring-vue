@@ -2,6 +2,7 @@ import type { ActionContext } from "vuex";
 import type { State, EagerToPlayPayload } from "@/types/Store.interface";
 import { ACTIONS, MUTATIONS } from "@/types/Store.interface";
 import { users } from "@/utils/mocks";
+import { USER_LOCAL_STORAGE } from "@/types/UserTypes.interface";
 
 const fakeHttpRequest = (): Promise<Record<string, number>> =>
   new Promise((resolve) => {
@@ -34,5 +35,19 @@ export default {
 
     const roomStatus = Math.random() > 0.7 ? true : false;
     context.commit(MUTATIONS.UPDATE_ROOM_STATUS, roomStatus);
+  },
+  [ACTIONS.SAVE_USER_ID](
+    context: ActionContext<State, State>,
+    userId: string
+  ): void {
+    localStorage.setItem(USER_LOCAL_STORAGE.ID_ITEM, userId);
+    context.commit(MUTATIONS.SAVE_USER_ID, userId);
+  },
+  [ACTIONS.GET_USER_ID](context: ActionContext<State, State>): void {
+    const userId = localStorage.getItem(USER_LOCAL_STORAGE.ID_ITEM);
+
+    if (userId) {
+      context.commit(MUTATIONS.SAVE_USER_ID, userId);
+    }
   },
 };

@@ -9,6 +9,9 @@ export default defineComponent({
   components: { UsersList },
   setup() {
     const store = useStore();
+    const isUserAuthenticated = computed(
+      () => store.getters.isUserAuthenticated
+    );
     const users = computed(() => store.getters.getUsers);
     const snackbar = computed(() => store.getters.getSnackbarConfig);
 
@@ -58,11 +61,16 @@ export default defineComponent({
       users,
       menuConfig,
       snackbar,
+      isUserAuthenticated,
     };
   },
 });
 </script>
 
 <template>
-  <users-list :users="users" :menuConfig="menuConfig" class="mt-4" />
+  <users-list
+    :users="users"
+    :menuConfig="isUserAuthenticated ? menuConfig : []"
+    class="mt-4"
+  />
 </template>

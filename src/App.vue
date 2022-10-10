@@ -3,12 +3,16 @@ import { defineComponent, computed } from "vue";
 import { RouterView } from "vue-router";
 import { useStore } from "vuex";
 import TheHeader from "./components/TheHeader.vue";
-import { SNACKBAR_TYPE } from "./types/Store.interface";
+import { ACTIONS, SNACKBAR_TYPE } from "./types/Store.interface";
 
 export default defineComponent({
   components: { TheHeader, RouterView },
   setup() {
     const store = useStore();
+
+    // Check if user is logged in.
+    store.dispatch(ACTIONS.GET_USER_ID);
+
     const snackbar = computed(() => store.getters.getSnackbarConfig);
     const color = computed(() => {
       switch (snackbar.value.type) {

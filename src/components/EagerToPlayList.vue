@@ -9,6 +9,9 @@ export default defineComponent({
   components: { UsersList },
   setup() {
     const store = useStore();
+    const isUserAuthenticated = computed(
+      () => store.getters.isUserAuthenticated
+    );
     const usersEagerToPlay = computed(() => store.getters.getUsersEagerToPlay);
     const snackbar = computed(() => store.getters.getSnackbarConfig);
     const menuConfig: Array<UsersListMenuConfig> = [
@@ -31,13 +34,18 @@ export default defineComponent({
       usersEagerToPlay,
       menuConfig,
       snackbar,
+      isUserAuthenticated,
     };
   },
 });
 </script>
 
 <template>
-  <users-list :users="usersEagerToPlay" :menuConfig="menuConfig" class="mt-4" />
+  <users-list
+    :users="usersEagerToPlay"
+    :menuConfig="isUserAuthenticated ? menuConfig : []"
+    class="mt-4"
+  />
   <p v-if="!usersEagerToPlay.length" class="pl-4">
     Masz pecha, nikt nie chce obecnie grać!
   </p>
