@@ -11,7 +11,7 @@ export default defineComponent({
     const store = useStore();
 
     // Check if user is logged in.
-    store.dispatch(ACTIONS.GET_USER_ID);
+    store.dispatch(ACTIONS.GET_USER);
 
     const snackbar = computed(() => store.getters.getSnackbarConfig);
     const color = computed(() => {
@@ -34,18 +34,20 @@ export default defineComponent({
 </script>
 
 <template>
-  <header>
-    <TheHeader />
-  </header>
-  <RouterView />
-  <v-snackbar
-    v-model="snackbar.show"
-    :timeout="2000"
-    :color="color"
-    variant="tonal"
-  >
-    <p>{{ snackbar.text }}</p>
-  </v-snackbar>
+  <v-app>
+    <header>
+      <TheHeader />
+    </header>
+    <RouterView />
+    <v-snackbar
+      v-model="snackbar.show"
+      :timeout="2000"
+      :color="color"
+      variant="tonal"
+    >
+      <p>{{ snackbar.text }}</p>
+    </v-snackbar>
+  </v-app>
 </template>
 
 <style scoped></style>

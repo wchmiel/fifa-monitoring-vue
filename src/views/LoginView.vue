@@ -16,7 +16,7 @@ export default defineComponent({
 
     // Save user Id if user not logged in.
     if (!isUserAuthenticated.value) {
-      store.dispatch(ACTIONS.SAVE_USER_ID, props.token);
+      store.dispatch(ACTIONS.SAVE_USER, props.token);
     }
 
     // Redirect to Home View.

@@ -12,7 +12,7 @@ export default defineComponent({
     const isUserAuthenticated = computed(
       () => store.getters.isUserAuthenticated
     );
-    const users = computed(() => store.getters.getUsers);
+    const users = computed(() => store.getters.getUsersWithoutLoggedUser);
     const snackbar = computed(() => store.getters.getSnackbarConfig);
 
     const menuConfig: Array<UsersListMenuConfig> = [

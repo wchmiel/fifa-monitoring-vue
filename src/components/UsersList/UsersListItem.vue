@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref } from "vue";
 import type { User, UsersListMenuConfig } from "@/types/UserTypes.interface";
 import type { PropType } from "vue";
 
@@ -15,11 +15,8 @@ export default defineComponent({
       showMenu.value = show;
     };
 
-    const userName = computed(() => `${props.user.name} ${props.user.surname}`);
-
     return {
       props,
-      userName,
       onToggleMenu,
       showMenu,
     };
@@ -35,12 +32,14 @@ export default defineComponent({
   >
     <v-divider />
     <v-col cols="2">
-      <img :src="props.user.avatar" alt="Avatar" />
+      <v-avatar size="48px">
+        <v-img alt="Avatar" :src="props.user.avatar"></v-img>
+      </v-avatar>
     </v-col>
     <v-col>
       <v-row>
         <v-col>
-          <h4>{{ userName }}</h4>
+          <h4>{{ props.user.name }}</h4>
           <h5>{{ props.user.company }}</h5>
         </v-col>
         <v-col

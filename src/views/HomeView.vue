@@ -31,7 +31,7 @@ export default defineComponent({
       <v-row>
         <v-col>
           <card-item
-            title="Gracze 1"
+            title="Gracze"
             subtitle="Profesjonalni gracze"
             iconSrc="/players_icon.png"
           >

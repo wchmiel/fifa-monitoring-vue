@@ -29,6 +29,15 @@ export default createStore<State>({
     getUsers(state: State): Array<User> {
       return state.users;
     },
+    getUsersWithoutLoggedUser(state: State): Array<User> {
+      const userDataId = state.userData?.id;
+
+      if (userDataId) {
+        return state.users.filter((u) => u.id !== userDataId);
+      }
+
+      return state.users;
+    },
     getUsersEagerToPlay(state: State): Array<User> {
       return state.users.filter((user) => user.eagerToPlay);
     },
@@ -43,6 +52,9 @@ export default createStore<State>({
     },
     isUserAuthenticated(state: State): boolean {
       return !!state.userId;
+    },
+    getUserData(state: State): User | undefined {
+      return state.userData;
     },
   },
   mutations: {
@@ -77,6 +89,15 @@ export default createStore<State>({
     },
     [MUTATIONS.SAVE_USER_ID](state: State, userId: string): void {
       state.userId = userId;
+    },
+    [MUTATIONS.SAVE_USER_DATA](state: State, userData: User): void {
+      state.userData = userData;
+    },
+    [MUTATIONS.REMOVE_USER_ID](state: State): void {
+      state.userId = "";
+    },
+    [MUTATIONS.REMOVE_USER_DATA](state: State): void {
+      state.userData = void 0;
     },
   },
   actions,

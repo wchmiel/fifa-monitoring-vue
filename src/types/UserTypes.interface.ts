@@ -2,10 +2,10 @@ export interface User {
   [key: string]: string | number | boolean | undefined;
   id: number;
   name: string;
-  surname: string;
   avatar: string;
   eagerToPlay?: boolean;
   company?: string;
+  compnayImage?: string;
 }
 
 export interface UsersListMenuConfig {
