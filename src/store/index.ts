@@ -2,7 +2,6 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 import type { InjectionKey } from "vue";
 import {
   type State,
-  type EagerToPlayPayload,
   type Snackbar,
   SNACKBAR_TYPE,
   MUTATIONS,
@@ -16,6 +15,7 @@ export default createStore<State>({
   state() {
     return {
       users: [],
+      players: [],
       isRoomAvailable: true,
       snackbar: {
         show: false,
@@ -38,8 +38,8 @@ export default createStore<State>({
 
       return state.users;
     },
-    getUsersEagerToPlay(state: State): Array<User> {
-      return state.users.filter((user) => user.eagerToPlay);
+    getPlayers(state: State): Array<User> {
+      return state.players;
     },
     getRoomStatus(state: State): boolean {
       return state.isRoomAvailable;
@@ -53,6 +53,15 @@ export default createStore<State>({
     isUserAuthenticated(state: State): boolean {
       return !!state.userId;
     },
+    isUserEagerToPlay(state: State): boolean {
+      const userId = state.userData?.id;
+
+      if (userId) {
+        return !!state.players.find((p) => p.id === userId);
+      }
+
+      return false;
+    },
     getUserData(state: State): User | undefined {
       return state.userData;
     },
@@ -64,15 +73,11 @@ export default createStore<State>({
     ): void {
       state.users = payload.users;
     },
-    [MUTATIONS.UPDATE_USER_EAGER_TO_PLAY](
+    [MUTATIONS.SAVE_PLAYERS](
       state: State,
-      payload: EagerToPlayPayload
+      payload: Record<string, Array<User>>
     ): void {
-      const user = state.users.find((user) => user.id === payload.userId);
-
-      if (user) {
-        user.eagerToPlay = payload.isEagerToPlay;
-      }
+      state.players = payload.players;
     },
     [MUTATIONS.UPDATE_ROOM_STATUS](
       state: State,

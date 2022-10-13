@@ -3,9 +3,8 @@ export interface User {
   id: number;
   name: string;
   avatar: string;
-  eagerToPlay?: boolean;
   company?: string;
-  compnayImage?: string;
+  companyImage?: string;
 }
 
 export interface UsersListMenuConfig {

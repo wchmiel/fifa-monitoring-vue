@@ -7,7 +7,6 @@ export const users: Array<User> = [
     surname: "Nowak",
     avatar: "./avatar.png",
     company: "Black Label",
-    eagerToPlay: false,
   },
   {
     id: 2,
@@ -15,7 +14,6 @@ export const users: Array<User> = [
     surname: "Testowski",
     avatar: "./avatar.png",
     company: "Black Label",
-    eagerToPlay: false,
   },
   {
     id: 3,
@@ -23,6 +21,5 @@ export const users: Array<User> = [
     surname: "Testowski",
     avatar: "./avatar.png",
     company: "Black Label",
-    eagerToPlay: false,
   },
 ];

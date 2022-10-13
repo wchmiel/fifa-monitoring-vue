@@ -18,17 +18,37 @@ export default {
     );
     context.commit(MUTATIONS.SAVE_USERS, { users: result.data.users });
   },
+  async [ACTIONS.FETCH_PLAYERS](
+    context: ActionContext<State, State>
+  ): Promise<void> {
+    const result = await axios.get(
+      import.meta.env.VITE_APP_API_SERVER + "/room/players"
+    );
+    context.commit(MUTATIONS.SAVE_PLAYERS, { players: result.data.players });
+  },
   async [ACTIONS.UPDATE_USER_EAGER_TO_PLAY](
     context: ActionContext<State, State>,
     payload: EagerToPlayPayload
-  ): Promise<Record<string, number>> {
-    const response = await fakeHttpRequest();
+  ): Promise<number> {
+    const userData = context.getters.getUserData;
+    const userId = context.getters.getUserId;
+    const apiUrl = payload.isEagerToPlay
+      ? "/room/add-player"
+      : "/room/remove-player";
 
-    if (response.status === 200) {
-      context.commit(MUTATIONS.UPDATE_USER_EAGER_TO_PLAY, payload);
+    const result = await axios.post(
+      import.meta.env.VITE_APP_API_SERVER + apiUrl,
+      {
+        userSlackId: userId,
+        ...userData,
+      }
+    );
+
+    if (result.status === 200) {
+      context.commit(MUTATIONS.SAVE_PLAYERS, { players: result.data.players });
     }
 
-    return response;
+    return result.status;
   },
   async [ACTIONS.GET_ROOM_STATUS](
     context: ActionContext<State, State>

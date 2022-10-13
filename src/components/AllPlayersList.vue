@@ -2,11 +2,11 @@
 import { defineComponent, computed } from "vue";
 import UsersList from "./UsersList/UsersList.vue";
 import { useStore } from "vuex";
-import { SNACKBAR_TYPE, ACTIONS, MUTATIONS } from "@/types/Store.interface";
-import type { User, UsersListMenuConfig } from "@/types/UserTypes.interface";
+import type { UsersListMenuConfig } from "@/types/UserTypes.interface";
+import CardItem from "./CardItem.vue";
 
 export default defineComponent({
-  components: { UsersList },
+  components: { UsersList, CardItem },
   setup() {
     const store = useStore();
     const isUserAuthenticated = computed(
@@ -22,39 +22,6 @@ export default defineComponent({
           console.log("Wyzwij na pojedynek!");
         },
       },
-      {
-        text: "Dodaj jako chętny do gry",
-        disableProp: "eagerToPlay",
-        action: async (userId: number): Promise<void> => {
-          const user = users.value.find((u: User) => u.id === userId);
-
-          if (!user.eagerToPlay) {
-            const result = await store.dispatch(
-              ACTIONS.UPDATE_USER_EAGER_TO_PLAY,
-              {
-                userId,
-                isEagerToPlay: true,
-              }
-            );
-
-            if (result.status === 200) {
-              store.commit(MUTATIONS.SHOW_SNACKBAR, {
-                text: "Zawodnik dodany do listy chętnych.",
-              });
-            } else {
-              store.commit(MUTATIONS.SHOW_SNACKBAR, {
-                text: "Coś poszło nie tak!",
-                type: SNACKBAR_TYPE.ERROR,
-              });
-            }
-          } else {
-            store.commit(MUTATIONS.SHOW_SNACKBAR, {
-              text: "Zawodnik jest już na liście chętnych.",
-              type: SNACKBAR_TYPE.INFO,
-            });
-          }
-        },
-      },
     ];
 
     return {
@@ -68,9 +35,22 @@ export default defineComponent({
 </script>
 
 <template>
-  <users-list
-    :users="users"
-    :menuConfig="isUserAuthenticated ? menuConfig : []"
-    class="mt-4"
-  />
+  <card-item
+    title="Gracze"
+    subtitle="Profesjonalni gracze"
+    iconSrc="/players_icon.png"
+  >
+    <users-list
+      :users="users"
+      :menuConfig="isUserAuthenticated ? menuConfig : []"
+      class="mt-4 mehow-all-players-list"
+    />
+  </card-item>
 </template>
+
+<style scoped>
+.mehow-all-players-list {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+</style>

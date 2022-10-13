@@ -2,6 +2,7 @@ import type { User } from "./UserTypes.interface";
 
 export interface State {
   users: Array<User>;
+  players: Array<User>;
   isRoomAvailable: boolean;
   snackbar: Snackbar;
   userId: string;
@@ -27,11 +28,12 @@ export enum ACTIONS {
   GET_USER = "GET_USER",
   FETCH_USER_DATA = "FETCH_USER_DATA",
   LOGOUT_USER = "LOGOUT_USER",
+  FETCH_PLAYERS = "FETCH_PLAYERS",
 }
 
 export enum MUTATIONS {
   SAVE_USERS = "SAVE_USERS",
-  UPDATE_USER_EAGER_TO_PLAY = "UPDATE_USER_EAGER_TO_PLAY",
+  SAVE_PLAYERS = "SAVE_PLAYERS",
   UPDATE_ROOM_STATUS = "UPDATE_ROOM_STATUS",
   SHOW_SNACKBAR = "SHOW_SNACKBAR",
   SAVE_USER_ID = "SAVE_USER_ID",

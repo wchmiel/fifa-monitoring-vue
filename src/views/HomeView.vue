@@ -30,35 +30,17 @@ export default defineComponent({
     <v-container>
       <v-row>
         <v-col>
-          <card-item
-            title="Gracze"
-            subtitle="Profesjonalni gracze"
-            iconSrc="/players_icon.png"
-          >
-            <all-players-list />
-          </card-item>
+          <all-players-list />
         </v-col>
         <v-col cols="8">
           <v-row class="mb-3">
             <v-col>
-              <card-item
-                title="Fifa room status"
-                subtitle="Co jest grane?"
-                iconSrc="/monitor_icon.png"
-              >
-                <room-status />
-              </card-item>
+              <room-status />
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <card-item
-                title="Chętni do gry"
-                subtitle="Gracze szukający kolegów do gry"
-                iconSrc="/pad_icon.png"
-              >
-                <eager-to-play-list />
-              </card-item>
+              <eager-to-play-list />
             </v-col>
             <v-col>
               <card-item

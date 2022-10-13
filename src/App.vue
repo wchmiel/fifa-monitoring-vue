@@ -34,20 +34,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-app>
-    <header>
-      <TheHeader />
-    </header>
-    <RouterView />
-    <v-snackbar
-      v-model="snackbar.show"
-      :timeout="2000"
-      :color="color"
-      variant="tonal"
-    >
-      <p>{{ snackbar.text }}</p>
-    </v-snackbar>
-  </v-app>
+  <header>
+    <TheHeader />
+  </header>
+  <RouterView />
+  <v-snackbar
+    v-model="snackbar.show"
+    :timeout="2000"
+    :color="color"
+    variant="tonal"
+  >
+    <p>{{ snackbar.text }}</p>
+  </v-snackbar>
 </template>
 
 <style scoped></style>
