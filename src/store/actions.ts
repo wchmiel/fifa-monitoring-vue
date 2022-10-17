@@ -101,4 +101,23 @@ export default {
     context.commit(MUTATIONS.REMOVE_USER_ID);
     context.commit(MUTATIONS.REMOVE_USER_DATA);
   },
+  async [ACTIONS.SEND_CHALLENGE](
+    context: ActionContext<State, State>,
+    opponentId: number
+  ): Promise<void> {
+    const userSlackId = context.getters.getUserId;
+
+    try {
+      await axios.post(
+        `${
+          import.meta.env.VITE_APP_API_SERVER
+        }/room/challengeNotify/${opponentId}`,
+        {
+          userSlackId,
+        }
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };

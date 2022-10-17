@@ -4,6 +4,7 @@ import UsersList from "./UsersList/UsersList.vue";
 import { useStore } from "vuex";
 import type { UsersListMenuConfig } from "@/types/UserTypes.interface";
 import CardItem from "./CardItem.vue";
+import { ACTIONS, MUTATIONS } from "@/types/Store.interface";
 
 export default defineComponent({
   components: { UsersList, CardItem },
@@ -18,8 +19,11 @@ export default defineComponent({
     const menuConfig: Array<UsersListMenuConfig> = [
       {
         text: "Wyzwij na pojedynek",
-        action: (): void => {
-          console.log("Wyzwij na pojedynek!");
+        action: async (userId: number): Promise<void> => {
+          await store.dispatch(ACTIONS.SEND_CHALLENGE, userId);
+          store.commit(MUTATIONS.SHOW_SNACKBAR, {
+            text: "Wyzwanie wysłane poprawnie! Powodzenia!",
+          });
         },
       },
     ];
