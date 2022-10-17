@@ -37,7 +37,7 @@ export default defineComponent({
 <template>
   <card-item
     title="Gracze"
-    subtitle="Profesjonalni gracze"
+    subtitle="Lista wszystkich graczy"
     iconSrc="/players_icon.png"
   >
     <users-list

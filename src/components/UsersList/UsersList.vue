@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import type {
   User,
   UsersListMenuConfig,
@@ -13,8 +13,13 @@ export default defineComponent({
   },
   components: { UsersListItem },
   setup(props) {
+    const sortedUsers = computed(() =>
+      (props.users || []).sort((a, b) => a.name.localeCompare(b.name))
+    );
+
     return {
       props,
+      sortedUsers,
     };
   },
 });
@@ -24,7 +29,7 @@ export default defineComponent({
   <v-sheet>
     <v-container>
       <users-list-item
-        v-for="user in props.users"
+        v-for="user in sortedUsers"
         :key="user.id"
         :user="user"
         :menuConfig="props.menuConfig"

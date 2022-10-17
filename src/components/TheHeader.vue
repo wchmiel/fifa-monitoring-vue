@@ -28,7 +28,7 @@ export default defineComponent({
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col cols="9">
         <div class="mehow-header-wrapper">
           <img src="/header_logo.png" alt="MeHow Logo" />
           <div>
@@ -79,13 +79,31 @@ export default defineComponent({
   align-items: center;
 }
 
-@media (min-width: 1280px) {
-  h1 {
+.mehow-header-wrapper h1 {
+  line-height: 1.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+.mehow-header-wrapper h3 {
+  font-size: 0.8rem;
+}
+
+.mehow-header-wrapper img {
+  height: 80px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .mehow-header-wrapper img {
+    height: 140px;
+  }
+  .mehow-header-wrapper h1 {
     font-size: 2.5rem;
     letter-spacing: 2px;
+    line-height: 2rem;
   }
-
-  h3 {
+  .mehow-header-wrapper h3 {
     font-size: 1.5rem;
   }
 }

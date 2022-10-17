@@ -31,55 +31,53 @@ export default defineComponent({
     class="pa-2"
   >
     <v-divider />
-    <v-col cols="2">
-      <v-avatar size="48px">
-        <v-img alt="Avatar" :src="props.user.avatar"></v-img>
-      </v-avatar>
-    </v-col>
-    <v-col>
-      <v-row>
-        <v-col>
+    <v-col cols="9">
+      <div class="d-flex justify-start align-center">
+        <img :src="props.user.avatar" alt="Avatar" class="mehow-avatar" />
+        <div class="pl-2">
           <h4>{{ props.user.name }}</h4>
           <h5>{{ props.user.company }}</h5>
-        </v-col>
-        <v-col
-          v-if="props.menuConfig && props.menuConfig.length"
-          cols="3"
-          class="d-flex justify-center align-center pr-2"
-        >
-          <v-menu transition="scroll-y-transition">
-            <template v-slot:activator="{ isActive, props }">
-              <v-btn v-bind="props">
-                <transition name="list-menu">
-                  <img
-                    v-if="showMenu || isActive"
-                    src="list-menu-icon.svg"
-                    alt="Menu icon"
-                  />
-                </transition>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item
-                v-for="config in props.menuConfig"
-                :key="config.text"
-                :disabled="
-                  config.disableProp ? !!user[config.disableProp] : false
-                "
-                link
-              >
-                <v-list-item-title @click="config.action(props.user.id)">
-                  {{ config.text }}
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
+    </v-col>
+    <v-col
+      v-if="props.menuConfig && props.menuConfig.length"
+      cols="3"
+      class="d-flex justify-center align-center pr-2"
+    >
+      <v-menu transition="scroll-y-transition">
+        <template v-slot:activator="{ isActive, props }">
+          <v-btn v-bind="props">
+            <transition name="list-menu">
+              <img
+                v-if="showMenu || isActive"
+                src="list-menu-icon.svg"
+                alt="Menu icon"
+              />
+            </transition>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="config in props.menuConfig"
+            :key="config.text"
+            :disabled="config.disableProp ? !!user[config.disableProp] : false"
+            link
+          >
+            <v-list-item-title @click="config.action(props.user.id)">
+              {{ config.text }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-col>
   </v-row>
 </template>
-<style>
+<style scoped>
+.mehow-avatar {
+  height: 54px;
+  border-radius: 100%;
+}
 .list-menu-enter-active {
   transition: all 0.2s ease-out;
 }

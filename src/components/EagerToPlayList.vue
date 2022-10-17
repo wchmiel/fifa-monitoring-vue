@@ -79,7 +79,7 @@ export default defineComponent({
 <template>
   <card-item
     title="Chętni do gry"
-    subtitle="Gracze szukający kolegów do gry"
+    subtitle="Zapisz się aby otrzymać powiadomienie"
     iconSrc="/pad_icon.png"
     :buttonText="isUserEagerToPlay ? 'Usuń mnie' : 'Dodaj mnie'"
     :buttonAction="onButtonClick"
@@ -93,7 +93,7 @@ export default defineComponent({
 
 <style scoped>
 .mehow-eager-to-play-list {
-  max-height: 25vh;
+  max-height: 50vh;
   overflow-y: scroll;
 }
 </style>

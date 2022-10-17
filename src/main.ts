@@ -18,7 +18,7 @@ app.use(router);
 const MeHowTheme: ThemeDefinition = {
   dark: true,
   colors: {
-    background: "#141414",
+    background: "#181818",
     surface: "#141414",
     primary: "#00DAC5",
     "primary-darken-1": "#3700B3",
@@ -31,17 +31,6 @@ const MeHowTheme: ThemeDefinition = {
     warning: "#FB8C00",
   },
 };
-
-export default createVuetify({
-  components,
-  directives,
-  theme: {
-    defaultTheme: "myCustomLightTheme",
-    themes: {
-      MeHowTheme,
-    },
-  },
-});
 
 const vuetify = createVuetify({
   components,
