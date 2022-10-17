@@ -3,6 +3,7 @@ import type { InjectionKey } from "vue";
 import {
   type State,
   type Snackbar,
+  type RoomStatus,
   SNACKBAR_TYPE,
   MUTATIONS,
 } from "@/types/Store.interface";
@@ -16,7 +17,9 @@ export default createStore<State>({
     return {
       users: [],
       players: [],
-      isRoomAvailable: true,
+      roomStatus: {
+        occupied: false,
+      },
       snackbar: {
         show: false,
         type: SNACKBAR_TYPE.SUCCESS,
@@ -41,8 +44,8 @@ export default createStore<State>({
     getPlayers(state: State): Array<User> {
       return state.players;
     },
-    getRoomStatus(state: State): boolean {
-      return state.isRoomAvailable;
+    getRoomStatus(state: State): RoomStatus {
+      return state.roomStatus;
     },
     getSnackbarConfig(state: State): Snackbar {
       return state.snackbar;
@@ -79,11 +82,8 @@ export default createStore<State>({
     ): void {
       state.players = payload.players;
     },
-    [MUTATIONS.UPDATE_ROOM_STATUS](
-      state: State,
-      isRoomAvailable: boolean
-    ): void {
-      state.isRoomAvailable = isRoomAvailable;
+    [MUTATIONS.UPDATE_ROOM_STATUS](state: State, roomStatus: RoomStatus): void {
+      state.roomStatus = roomStatus;
     },
     [MUTATIONS.SHOW_SNACKBAR](state: State, payload: Snackbar): void {
       state.snackbar = {

@@ -4,11 +4,6 @@ import { ACTIONS, MUTATIONS } from "@/types/Store.interface";
 import { USER_LOCAL_STORAGE, type User } from "@/types/UserTypes.interface";
 import axios from "axios";
 
-const fakeHttpRequest = (): Promise<Record<string, number>> =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve({ status: 200 }), 300);
-  });
-
 export default {
   async [ACTIONS.FETCH_USERS](
     context: ActionContext<State, State>
@@ -53,10 +48,16 @@ export default {
   async [ACTIONS.GET_ROOM_STATUS](
     context: ActionContext<State, State>
   ): Promise<void> {
-    await fakeHttpRequest();
+    const result = await axios.get(
+      `${import.meta.env.VITE_APP_API_SERVER}/room/status`
+    );
 
-    const roomStatus = Math.random() > 0.7 ? true : false;
-    context.commit(MUTATIONS.UPDATE_ROOM_STATUS, roomStatus);
+    if (result.status === 200) {
+      context.commit(MUTATIONS.UPDATE_ROOM_STATUS, {
+        occupied: result.data.occupied,
+        startTime: result.data.startTime,
+      });
+    }
   },
   async [ACTIONS.FETCH_USER_DATA](
     _: ActionContext<State, State>,

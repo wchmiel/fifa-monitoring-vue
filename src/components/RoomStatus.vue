@@ -8,7 +8,7 @@ export default defineComponent({
   components: { CardItem },
   setup() {
     const store = useStore();
-    const isRoomAvailable = computed(() => store.getters.getRoomStatus);
+    const roomStatus = computed(() => store.getters.getRoomStatus);
 
     store.dispatch(ACTIONS.GET_ROOM_STATUS);
 
@@ -22,7 +22,7 @@ export default defineComponent({
     });
 
     return {
-      isRoomAvailable,
+      roomStatus,
     };
   },
 });
@@ -38,7 +38,7 @@ export default defineComponent({
       <h2>
         Status:
         <v-chip
-          v-if="isRoomAvailable"
+          v-if="!roomStatus.occupied"
           class="ma-2"
           color="green"
           text-color="white"
@@ -59,5 +59,11 @@ export default defineComponent({
         </v-chip>
       </h2>
     </div>
+    <h3 class="ml-4 mt-5">
+      <span v-if="roomStatus.occupied"
+        >Mecz trwa, godzina rozpoczęcia: {{ roomStatus.startTime }}</span
+      >
+      <span v-else>Fifa room jest wolny!</span>
+    </h3>
   </card-item>
 </template>

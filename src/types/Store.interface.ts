@@ -3,10 +3,15 @@ import type { User } from "./UserTypes.interface";
 export interface State {
   users: Array<User>;
   players: Array<User>;
-  isRoomAvailable: boolean;
+  roomStatus: RoomStatus;
   snackbar: Snackbar;
   userId: string;
   userData?: User;
+}
+
+export interface RoomStatus {
+  occupied: boolean;
+  startTime?: string;
 }
 
 export interface Snackbar {
